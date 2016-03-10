@@ -1,0 +1,32 @@
+# Taken from https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-and-phpmyadmin-with-docker-compose-on-ubuntu-14-04
+database:
+-v /opt/docker/database:/var/lib/mysql:rw \
+  image: sameersbn/mysql:latest
+  environment:
+    DB_NAME: wordpress
+    DB_USER: wordpress
+    DB_PASS: wordpress
+wordpress:
+  image: wordpress
+  links:
+    - database:mysql
+  ports:
+    - 8080:80
+  environment:
+    WORDPRESS_DB_HOST: mysql:3306
+    WORDPRESS_DB_NAME: wordpress
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_PASSWORD: wordpress
+    WORDPRESS_AUTH_KEY: SECURE_AUTH_KEY
+    WORDPRESS_LOGGED_IN_KEY: SECURE_LOGGED_IN_KEY
+    WORDPRESS_AUTH_SALT: SECURE_AUTH_SALT
+    WORDPRESS_LOGGED_IN_SALT: SECURE_LOGGED_IN_SALT
+phpmyadmin:
+  image: corbinu/docker-phpmyadmin
+  links:
+    - database:mysql
+  ports:
+    - 8181:80
+  environment:
+    MYSQL_USERNAME: root
+    MYSQL_ROOT_PASSWORD: wordpress
