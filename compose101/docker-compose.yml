@@ -1,11 +1,12 @@
 # Taken from https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-and-phpmyadmin-with-docker-compose-on-ubuntu-14-04
 database:
--v /opt/docker/database:/var/lib/mysql:rw \
   image: sameersbn/mysql:latest
   environment:
     DB_NAME: wordpress
     DB_USER: wordpress
     DB_PASS: wordpress
+  volumes:
+    - "/opt/docker/database:/var/lib/mysql:rw"
 wordpress:
   image: wordpress
   links:
