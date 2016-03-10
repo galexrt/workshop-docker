@@ -4,7 +4,7 @@ docker run \
     --name wordpress \
     -d \
     --link mysql:database \
-    -p 80:80 \
+    -p 8080:80 \
     -e 'WORDPRESS_DB_HOST=mysql:3306' \
     -e 'WORDPRESS_DB_NAME=wordpress' \
     -e 'WORDPRESS_DB_USER=wordpress' \
