@@ -19,39 +19,6 @@
     is_atomic: true
   when: s.stat.exists
 
-- name: Stop firewalld service
-  service:
-    name: firewalld
-    state: stopped
-
-- name: Remove firewalld package
-  action: "{{ ansible_pkg_mgr }}"
-  args:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-   - firewalld
-   - iptables-services
-
-- name: Upgrade all packages
-  action: "{{ ansible_pkg_mgr }}"
-  args:
-    name: '*'
-    state: latest
-
-- name: Install basic packages
-  yum:
-    name: "{{ item }}"
-    state: installed
-  with_items:
-   - socat
-   - htop
-   - iotop
-   - vim
-   - git
-   - ethtool
-   - bridge-utils
-
 - include: fedora-dnf.yml
   when: os_version.stdout|int >= 22 and 'Fedora' in distro.stdout and is_atomic is not defined
 

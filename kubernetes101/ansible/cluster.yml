@@ -1,5 +1,5 @@
 ---
-# This playbook deploys a kubernetes cluster 
+# This playbook deploys a kubernetes cluster
 # with the default addons.
 
 - hosts: all
@@ -9,6 +9,14 @@
     - pre-ansible
   tags:
     - pre-ansible
+
+# Install etcd
+- hosts: all
+  sudo: yes
+  roles:
+    - preps
+  tags:
+    - preps
 
 # Install etcd
 - hosts: etcd

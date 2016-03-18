@@ -52,7 +52,7 @@ networking: flannel
 # Flannel internal network (optional). When flannel is used, it will assign IP
 # addresses from this range to individual pods.
 # This network must be unused in your network infrastructure!
-flannel_subnet: 172.16.0.0
+flannel_subnet: 172.15.0.0
 
 # Flannel internal network total size (optional). This is the prefix of the
 # entire flannel overlay network.  So the entirety of 172.16.0.0/12 must be
@@ -91,6 +91,6 @@ apiserver_extra_args: "--runtime-config=extensions/v1beta1/deployments=true --se
 
 proxy_extra_args: "--proxy-port-range=18001-20000 --proxy-mode=iptables --masquerade-all=true"
 
-docker_opts: "--iptables=false --ip-masq=false"
+docker_opts: "--iptables=false --ip-masq=false --bip=192.168.111.1/24"
 
-flannel_opts: "--iface=eth0 --ip-masq=true"
+flannel_opts: "--ip-masq=true"
