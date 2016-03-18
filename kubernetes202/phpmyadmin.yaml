@@ -1,6 +1,6 @@
 # Kubernetes API version
 apiVersion: v1
-# Type of "request" in this case a Pod
+# Type of "request"
 kind: Pod
 # Metadata of the "object"
 metadata:
