@@ -2,3 +2,4 @@ myinventory
 inventory
 *.swp
 *~
+*.retry
