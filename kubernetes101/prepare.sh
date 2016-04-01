@@ -25,6 +25,6 @@ cp -r "$DIR/ansible" "$DIR/kubernetes/contrib"
 
 echo "++++++++++++++++++++++++++++++++++"
 echo "=> Files prepared. Done."
-echo "=> Please go into the `kubernetes/contrib/ansible` directory and"
-echo "=> run the `setup.sh`"
+echo "=> Please go into the 'kubernetes/contrib/ansible' directory and"
+echo "=> run the 'setup.sh'"
 
