@@ -8,7 +8,7 @@ cd "$DIR" || exit 1
 
 wget "https://github.com/kubernetes/kubernetes/releases/download/v$KUBERNETES_VERSION/kubernetes.tar.gz" -O "$DIR/kubernetes.tar.gz"
 tar xfz "$DIR/kubernetes.tar.gz"
-rm -rf "$DIR/kubernetes/contrib/*"
+rm -rf "$DIR/kubernetes/contrib"
 git clone https://github.com/kubernetes/contrib.git "$DIR/kubernetes/contrib/"
 rm -rf "$DIR/kubernetes/contrib/ansible"
 
@@ -23,5 +23,8 @@ mkdir -p "$DIR/kubernetes/_output/local/go"
 cp -r "$DIR/kubernetes/server/kubernetes/server/bin" "$DIR/kubernetes/_output/local/go"
 cp -r "$DIR/ansible" "$DIR/kubernetes/contrib"
 
-echo ""
+echo "++++++++++++++++++++++++++++++++++"
 echo "=> Files prepared. Done."
+echo "=> Please go into the `kubernetes/contrib/ansible` directory and"
+echo "=> run the `setup.sh`"
+
