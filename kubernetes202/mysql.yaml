@@ -5,25 +5,27 @@ kind: Pod
 # Metadata of the "object"
 metadata:
   # Name of the "object"
-  name: wordpress
+  name: mysql
   # Labels of the "object"
   labels:
-    # A lable named "name" with value "wordpress"
-    name: wordpress
+    # A lable named "name" with value "mysql"
+    name: mysql
 # spec ~= Specificationsof the "object"
 spec:
   # List of Container definitions
   containers:
     # The "name"/"suffix" of the container name
-    - name: phpmyadmin
+    - name: mysql
       # What Docker image to use
-      image: corbinu/docker-phpmyadmin
+      image: sameersbn/mysql:latest
       env:
-        - name: MYSQL_USERNAME
-          value: root
-        - name: MYSQL_ROOT_PASSWORD
+        - name: DB_NAME
+          value: wordpress
+        - name: DB_USER
+          value: wordpress
+        - name: DB_PASS
           value: wordpress
       # List of container ports reachable from within the cluster
       ports:
-        - containerPort: 80
-          name: phpmyadmin
+        - containerPort: 3306
+          name: mysql

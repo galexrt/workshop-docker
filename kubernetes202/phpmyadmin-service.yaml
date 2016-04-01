@@ -10,7 +10,7 @@ spec:
   ports:
     # the port that this service should serve on
     - port: 81
-      #
+      # set the target of the port, in this case 81 -> 80
       targetPort: 80
   # label keys and values that must match in order to receive traffic for this service
   selector:

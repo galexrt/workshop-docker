@@ -4,9 +4,9 @@ kind: Service
 metadata:
   # labels for the service
   labels:
-    name: wpfrontend
+    name: wordpress
   # name of the service
-  name: wpfrontend
+  name: wordpress
 spec:
   ports:
     # the port that this service should serve on
