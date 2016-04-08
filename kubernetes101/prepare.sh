@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-KUBERNETES_VERSION="1.2.0"
+KUBERNETES_VERSION="1.2.2"
 
 cd "$DIR" || exit 1
 
@@ -27,4 +27,3 @@ echo "++++++++++++++++++++++++++++++++++"
 echo "=> Files prepared. Done."
 echo "=> Please go into the 'kubernetes/contrib/ansible' directory and"
 echo "=> run the 'setup.sh'"
-
