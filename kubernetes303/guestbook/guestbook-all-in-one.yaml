@@ -16,27 +16,26 @@ spec:
     tier: backend
     role: master
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: redis-master
-  # these labels can be applied automatically
+  # these labels can be applied automatically 
   # from the labels in the pod template if not set
-  # labels:
-  #   app: redis
-  #   role: master
-  #   tier: backend
+  labels:
+    app: redis
+    role: master
+    tier: backend
 spec:
   # this replicas value is default
   # modify it according to your case
   replicas: 1
-  # selector can be applied automatically
+  # selector can be applied automatically 
   # from the labels in the pod template if not set
   # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     role: master
-  #     tier: backend
+  #   app: guestbook
+  #   role: master
+  #   tier: backend
   template:
     metadata:
       labels:
@@ -71,16 +70,16 @@ spec:
     tier: backend
     role: slave
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: redis-slave
   # these labels can be applied automatically
   # from the labels in the pod template if not set
-  # labels:
-  #   app: redis
-  #   role: slave
-  #   tier: backend
+  labels:
+    app: redis
+    role: slave
+    tier: backend
 spec:
   # this replicas value is default
   # modify it according to your case
@@ -88,10 +87,9 @@ spec:
   # selector can be applied automatically
   # from the labels in the pod template if not set
   # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     role: slave
-  #     tier: backend
+  #   app: guestbook
+  #   role: slave
+  #   tier: backend
   template:
     metadata:
       labels:
@@ -135,15 +133,15 @@ spec:
     app: guestbook
     tier: frontend
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: frontend
   # these labels can be applied automatically
   # from the labels in the pod template if not set
-  # labels:
-  #   app: guestbook
-  #   tier: frontend
+  labels:
+    app: guestbook
+    tier: frontend
 spec:
   # this replicas value is default
   # modify it according to your case
@@ -151,9 +149,8 @@ spec:
   # selector can be applied automatically
   # from the labels in the pod template if not set
   # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     tier: frontend
+  #   app: guestbook
+  #   tier: frontend
   template:
     metadata:
       labels:
