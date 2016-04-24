@@ -1,2 +1,4 @@
 # workshop-docker
-A little workshop about Docker.
+Workshop about Docker and Kubernetes.
+
+You can find the Workshop at https://edenmal.net/2016/04/01/Docker-for-Admins-Workshop-v2/.
