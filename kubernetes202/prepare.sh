@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-KUBERNETES_VERSION="v1.3.4"
+KUBERNETES_VERSION="v1.3.6"
 
 cd "$DIR" || exit 1
 
@@ -24,4 +24,7 @@ cp -r "$DIR/kubernetes/server/kubernetes/server/bin" "$DIR/kubernetes/_output/lo
 echo "++++++++++++++++++++++++++++++++++"
 echo "=> Files prepared. Done."
 echo "=> Please go into the 'kubernetes/contrib/ansible' directory and"
-echo "=> run the 'setup.sh' with '-vv' as argument"
+echo "=> Create your inventory and modify the 'inventory/group_vars/all.yml'"
+echo "=> according to your setup."
+echo "=> After that go into the 'scripts/' folder run the './deploy-cluster.sh'"
+echo "=> with '-vv' as an argument."
