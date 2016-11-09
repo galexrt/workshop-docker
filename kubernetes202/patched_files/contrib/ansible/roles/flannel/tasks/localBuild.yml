@@ -3,8 +3,8 @@
   register: st
 
 - name: Copy tar file
-  get_url:
-    url: "{{ localBuildOutput }}"
+  copy:
+    src: "{{ localBuildOutput }}"
     dest: "{{ ansible_temp_dir }}"
   when: st.stat.isdir is not defined
 
