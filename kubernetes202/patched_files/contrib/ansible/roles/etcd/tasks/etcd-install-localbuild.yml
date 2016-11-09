@@ -1,0 +1,20 @@
+---
+- name: Copy tar file
+  copy:
+    src: "{{ localBuildOutput }}"
+    dest: "{{ ansible_temp_dir }}"
+
+- name: Extract tar file
+  unarchive:
+    src: "{{ ansible_temp_dir }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+    dest: /usr/local
+    copy: no
+
+- name: Create symlinks
+  file:
+    src: /usr/local/etcd-v{{ etcd_version }}-linux-amd64/{{ item }}
+    dest: /usr/bin/{{ item }}
+    state: link
+  with_items:
+    - etcd
+    - etcdctl

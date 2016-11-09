@@ -2,7 +2,10 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-KUBERNETES_VERSION="v1.3.6"
+KUBERNETES_VERSION="v1.4.5"
+ETCD_VERSION="3.0.14"
+FLANNEL_VERSION="0.6.2"
+
 
 cd "$DIR" || exit 1
 
@@ -20,6 +23,23 @@ cp -r "$DIR/kubernetes/server/kubernetes/saltbase" "$DIR/kubernetes/contrib"
 
 mkdir -p "$DIR/kubernetes/_output/local/go"
 cp -r "$DIR/kubernetes/server/kubernetes/server/bin" "$DIR/kubernetes/_output/local/go"
+wget "https://github.com/coreos/etcd/releases/download/v3.0.14/etcd-v$ETCD_VERSION-linux-amd64.tar.gz" -O "$DIR/kubernetes/etcd-v$ETCD_VERSION.tar.gz"
+wget "https://github.com/coreos/flannel/releases/download/v0.6.2/flannel-v$FLANNEL_VERSION-linux-amd64.tar.gz" -O "$DIR/kubernetes/flannel-v$FLANNEL_VERSION-linux-amd64.tar.gz"
+
+echo "etcd_version: $FLANNEL_VERSION" >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
+echo "localBuildOutput: \"../../../etcd-v{{ etcd_version }}-linux-amd64.tar.gz\"" >> "$DIR/kubernetes/contrib/ansible/roles/etcd/defaults/main.yaml"
+echo "flannel_version: $FLANNEL_VERSION" >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
+echo "localBuildOutput: \"../../../flannel-{{ flannel_version }}-linux-amd64.tar.gz\"" >> "$DIR/kubernetes/contrib/ansible/roles/flannel/defaults/main.yaml"
+
+cat <<EOF >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
+source_type: localBuild
+
+kube_source_type: localBuild
+etcd_source_type: localBuild
+flannel_source_type: localBuild
+EOF
+
+cp -rf "$DIR/patched_files/"* "$DIR/kubernetes/"
 
 echo "++++++++++++++++++++++++++++++++++"
 echo "=> Files prepared. Done."
