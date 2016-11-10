@@ -18,11 +18,11 @@
 
 - set_fact:
     flannel_use_upstart: true
-  when:  "{{ ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 15 }}"
- or flannel_source_type == "localBuild"
- - name: Install Flannel with localbuild
-   include: github-release.yml
-   when: flannel_source_type == "github-release"
+  when:  "{{ ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 15 or flannel_source_type == 'localBuild' }}"
+
+- name: Install Flannel with localbuild
+  include: github-release.yml
+  when: flannel_source_type == "github-release"
 
 - name: Install Flannel with github release
   include: localBuild.yml

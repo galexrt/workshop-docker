@@ -26,7 +26,7 @@ cp -r "$DIR/kubernetes/server/kubernetes/server/bin" "$DIR/kubernetes/_output/lo
 wget "https://github.com/coreos/etcd/releases/download/v3.0.14/etcd-v$ETCD_VERSION-linux-amd64.tar.gz" -O "$DIR/kubernetes/etcd-v$ETCD_VERSION.tar.gz"
 wget "https://github.com/coreos/flannel/releases/download/v0.6.2/flannel-v$FLANNEL_VERSION-linux-amd64.tar.gz" -O "$DIR/kubernetes/flannel-v$FLANNEL_VERSION-linux-amd64.tar.gz"
 
-echo "etcd_version: $FLANNEL_VERSION" >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
+echo "etcd_version: $ETCD_VERSION" >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
 echo "localBuildOutput: \"../../../etcd-v{{ etcd_version }}-linux-amd64.tar.gz\"" >> "$DIR/kubernetes/contrib/ansible/roles/etcd/defaults/main.yaml"
 echo "flannel_version: $FLANNEL_VERSION" >> "$DIR/kubernetes/contrib/ansible/inventory/group_vars/all.yml"
 echo "localBuildOutput: \"../../../flannel-{{ flannel_version }}-linux-amd64.tar.gz\"" >> "$DIR/kubernetes/contrib/ansible/roles/flannel/defaults/main.yaml"
@@ -37,6 +37,8 @@ source_type: localBuild
 kube_source_type: localBuild
 etcd_source_type: localBuild
 flannel_source_type: localBuild
+
+flannel_opts: "-ip-masq=true"
 EOF
 
 cp -rf "$DIR/patched_files/"* "$DIR/kubernetes/"
