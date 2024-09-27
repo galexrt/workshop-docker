@@ -17,11 +17,11 @@ func helloHandler(res http.ResponseWriter, req *http.Request) {
 		`<!doctype html>
 		<html>
 	<head>
-		<title>Hello Gopher</title>
+		<title>Hello I am a multi layered built image</title>
 	</head>
 	<body>
 		Hello Gopher </br>
-		I am a simple application that displays this web page built inside a container.
+		I am a multi layered built image.
 	</body>
 </html>`,
 	)

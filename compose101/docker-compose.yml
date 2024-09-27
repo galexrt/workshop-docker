@@ -1,37 +1,42 @@
-database:
-  image: sameersbn/mysql:latest
-  environment:
-    DB_NAME: wordpress
-    DB_USER: wordpress
-    DB_PASS: wordpress
-    DB_REMOTE_ROOT_NAME: root
-    DB_REMOTE_ROOT_PASS: workshop
-  volumes:
-    - "/opt/docker/database:/var/lib/mysql:rw"
-# wordpress image configuration see https://hub.docker.com/r/_/wordpress/
-wordpress:
-  image: wordpress
-  links:
-    - __BLANK__:mysql
-  ports:
-    - 8080:80
-  environment:
-    WORDPRESS_DB_HOST: __BLANK__:3306
-    WORDPRESS_DB_NAME: __BLANK__
-    WORDPRESS_DB_USER: __BLANK__
-    WORDPRESS_DB_PASSWORD: __BLANK__
-    WORDPRESS_AUTH_KEY: SECURE_AUTH_KEY
-    WORDPRESS_LOGGED_IN_KEY: SECURE_LOGGED_IN_KEY
-    WORDPRESS_AUTH_SALT: SECURE_AUTH_SALT
-    WORDPRESS_LOGGED_IN_SALT: SECURE_LOGGED_IN_SALT
-# phpmyadmin image configuration see https://hub.docker.com/r/phpmyadmin/phpmyadmin/
-phpmyadmin:
-  image: phpmyadmin/phpmyadmin
-  links:
-    - database:mysql
-  ports:
-    - 8181:80
-  environment:
-    PMA_HOST: mysql
-    PMA_USER: root
-    PMA_PASSWORD: workshop
+version: "3.5"
+
+services:
+  mysql:
+    image: docker.io/library/mysql:latest
+    environment:
+      DB_NAME: wordpress
+      DB_USER: wordpress
+      DB_PASS: wordpress
+      DB_REMOTE_ROOT_NAME: root
+      DB_REMOTE_ROOT_PASS: workshop
+    volumes:
+      - "mysql:/var/lib/mysql:rw"
+  # wordpress image configuration see https://hub.docker.com/_/wordpress/
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: __BLANK__:3306
+      WORDPRESS_DB_NAME: __BLANK__
+      WORDPRESS_DB_USER: __BLANK__
+      WORDPRESS_DB_PASSWORD: __BLANK__
+      WORDPRESS_AUTH_KEY: SECURE_AUTH_KEY
+      WORDPRESS_LOGGED_IN_KEY: SECURE_LOGGED_IN_KEY
+      WORDPRESS_AUTH_SALT: SECURE_AUTH_SALT
+      WORDPRESS_LOGGED_IN_SALT: SECURE_LOGGED_IN_SALT
+    volumes:
+      - wordpress:/var/www/html
+  # phpmyadmin image configuration see https://hub.docker.com/r/phpmyadmin/phpmyadmin/
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8181:80
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: workshop
+
+volumes:
+  mysql:
+  wordpress:
