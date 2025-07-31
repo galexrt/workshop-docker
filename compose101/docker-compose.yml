@@ -1,14 +1,13 @@
 version: "3.5"
-
 services:
+  # mysql image configuration see https://hub.docker.com/_/mysql/
   mysql:
     image: docker.io/library/mysql:latest
     environment:
-      DB_NAME: wordpress
-      DB_USER: wordpress
-      DB_PASS: wordpress
-      DB_REMOTE_ROOT_NAME: root
-      DB_REMOTE_ROOT_PASS: workshop
+      MYSQL_ROOT_PASSWORD: my-scret-pw
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
     volumes:
       - "mysql:/var/lib/mysql:rw"
   # wordpress image configuration see https://hub.docker.com/_/wordpress/
